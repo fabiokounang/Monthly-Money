@@ -1,0 +1,17 @@
+div.wrapper {
+  padding: 30px;
+}
+
+div table {
+  width: 100%;
+}
+
+div table th,
+div table td,
+div table td span {
+  font-family: 'unique-sub';
+}
+
+div mat-form-field.mat-field {
+  width: 100%;
+}

@@ -1,0 +1,51 @@
+<mat-sidenav-container>
+  <mat-sidenav [opened]="openSideNav" mode="side" #sidenav role="navigation">
+    <div class="profile-container">
+      <div class="img-container">
+        <img class="image" width="50" src="https://celebslifereel.com/wp-content/uploads/2018/06/Raon-Lee.jpg" alt="">
+      </div>
+
+      <p class="text">Administrator</p>
+      <p class="sub-text">Id: Administrator</p>
+      <br>
+    </div>
+    
+    <div>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/dashboard/accumulation"> 
+          <mat-icon>home</mat-icon>
+          <span class="nav-caption">Dashboard</span>
+        </a>
+        <a mat-list-item routerLink="/dashboard/list-management"> 
+          <mat-icon>list</mat-icon>
+          <span class="nav-caption">List Management</span>
+        </a>
+        <a mat-list-item routerLink="/dashboard/money-management"> 
+          <mat-icon>money</mat-icon>
+          <span class="nav-caption">Money Management</span>
+        </a>
+        <a mat-list-item routerLink="/"> 
+          <mat-icon>money</mat-icon>
+          <span class="nav-caption">Logout</span>
+        </a>
+      </mat-nav-list>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="accent">
+      <div>
+        <button mat-icon-button (click)="onToggle(sidenav)">
+          <mat-icon class="material-icons">menu</mat-icon>
+        </button>
+      </div>
+
+      <div class="logo-mo-mo" [routerLink]="['/dashboard']">
+        Monthly Money
+      </div>
+    </mat-toolbar>
+
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

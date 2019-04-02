@@ -1,0 +1,41 @@
+<div style="padding: 20px">
+  <main class="wrapper">
+    <div class="title-wrap">
+      <h1>Login</h1>
+      <hr>
+    </div>
+
+    <div class="subtitle">
+      <h3>Welcome ! Login to manage your monthly money</h3>
+      <p>
+        Did you 
+        <span class="forget-pass">
+          forget your password ?
+        </span>
+      </p>
+    </div>
+
+    <form (ngSubmit)="onLogin()" [formGroup]="loginForm" class="form-wrapper">
+      <mat-form-field class="">
+        <input formControlName="email" matInput placeholder="E-mail">
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error>E-mail is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="">
+        <input formControlName="password" matInput placeholder="Password">
+        <mat-icon matSuffix>lock</mat-icon>
+        <mat-error>Password is required</mat-error>
+      </mat-form-field>
+
+      <div class="button-wrapper">
+        <button mat-raised-button class="button-login">
+          Login
+        </button>
+        <p class="acc">Didn't have an account ?
+          <span class="login-acc" routerLink="/auth/signup">Sign up here</span>
+        </p>
+      </div>
+    </form>
+  </main>
+</div>

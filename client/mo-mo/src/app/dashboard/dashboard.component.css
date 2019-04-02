@@ -1,0 +1,35 @@
+mat-sidenav-container {
+  height: 100vh;
+  width: 100%;
+}
+
+mat-sidenav-container mat-sidenav div.profile-container {
+  background: lightgrey;
+  text-align: center;
+  padding-top: 20px;
+  font-family: 'unique-sub';
+}
+
+mat-sidenav-container mat-sidenav img.image {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+mat-sidenav-container mat-sidenav p.text,
+mat-sidenav-container mat-sidenav p.sub-text {
+  margin: 5px;
+}
+
+mat-sidenav {
+  width: 250px;
+}
+
+mat-sidenav-container mat-sidenav-content div.logo-mo-mo {
+  cursor: pointer;
+}
+
+mat-sidenav-container mat-nav-list a span.nav-caption {
+  padding-left: 15px;
+  font-family: 'unique-sub';
+}
+

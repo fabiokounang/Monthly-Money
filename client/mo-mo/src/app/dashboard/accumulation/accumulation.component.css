@@ -1,0 +1,8 @@
+div.wrapper {
+  padding: 30px;
+}
+
+
+div mat-form-field.mat-field {
+  width: 100%;
+}

@@ -1,0 +1,39 @@
+<div style="padding: 20px">
+  <main class="wrapper">
+    <div class="title-wrap">
+      <h1>Sign Up</h1>
+      <hr>
+    </div>
+
+    <div class="subtitle">
+      <h3>Welcome ! Sign up for a better management</h3>
+    </div>
+
+    <form (ngSubmit)="onSignUp()" [formGroup]="signUpForm" class="form-wrapper">
+      <mat-form-field class="">
+        <input formControlName="email" matInput placeholder="E-mail">
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error>E-mail is required</mat-error>
+      </mat-form-field>
+      <mat-form-field class="">
+        <input formControlName="username" matInput placeholder="Username">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-error>Username is required</mat-error>
+      </mat-form-field>
+      <mat-form-field class="">
+        <input formControlName="password" matInput placeholder="Password">
+        <mat-icon matSuffix>lock</mat-icon>
+        <mat-error>Password is required</mat-error>
+      </mat-form-field>
+
+      <div class="button-wrapper">
+        <button mat-raised-button class="button-signup">
+          Sign Up
+        </button>
+        <p class="acc">Already have an account ?
+          <span class="signup-acc" routerLink="/auth/login">Login here</span>
+        </p>
+      </div>
+    </form>
+  </main>
+</div>

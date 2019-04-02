@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+@font-face {
+  font-family: 'unique';
+  src: url(./assets/AvenirLTStd-Black.woff);
+}
+
+@font-face {
+  font-family: 'unique-sub';
+  src: url(./assets/AvenirLTStd-Book.woff);
+}

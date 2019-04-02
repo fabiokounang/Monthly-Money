@@ -1,0 +1,117 @@
+@font-face {
+  font-family: 'unique';
+  src: url(../../../assets/AvenirLTStd-Black.woff);
+}
+
+@font-face {
+  font-family: 'unique-sub';
+  src: url(../../../assets/AvenirLTStd-Book.woff);
+}
+
+main.wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+main div.title-wrap h1 {
+  margin: 0;
+  font-family: 'unique';
+}
+
+main div hr {
+  border: 0;
+  height: 3px;
+  background-image: linear-gradient(90deg, #ff6eaa, #8989ff);
+  width: 120px;
+}
+
+main div.subtitle {
+  font-family: 'unique-sub';
+}
+
+main div.subtitle h3 {
+  font-weight: normal;
+}
+
+main form div.button-wrapper button {
+  font-family: 'unique';
+  color: white;
+  background: linear-gradient(90deg, #ff6eaa, #8989ff);
+}
+
+main form div.button-wrapper button.button-signup {
+  width: 100%;
+}
+
+main form div.button-wrapper p.acc {
+  font-size: 12px;
+  font-family: 'unique-sub';
+}
+
+main form div.button-wrapper p.acc span.signup-acc {
+  font-family: 'unique-sub';
+  cursor: pointer;
+  color: #8989ff;
+}
+
+span.signup-acc:hover {
+  text-decoration: underline;
+}
+
+mat-toolbar {
+  padding: 0;
+  margin: 0;
+  background: white;
+}
+
+mat-toolbar div.left-section {
+  position: absolute;
+  left: 20px;
+  font-size: 15px;
+}
+
+mat-toolbar div.right-section {
+  position: absolute;
+  right: 50px;
+  font-size: 15px;
+}
+
+mat-toolbar div.right-section span.nav-toolbar-caption {
+  margin-right: 20px;
+  cursor: pointer;
+  color: black;
+  transition: all 0.5s;
+}
+
+mat-toolbar div.right-section span.nav-toolbar-caption:hover {
+  color: #8989ff;
+}
+
+mat-form-field {
+  display: block;
+  margin-bottom: 10px;
+}
+
+mat-icon {
+  vertical-align: middle;
+  text-align: left;
+  color: lightgrey;
+}
+
+@media screen and (max-width: 800px) {
+  main div.title-wrap h1 {
+    font-size: 24px;
+  }
+
+  main div.subtitle h3 {
+    font-size: 10px;
+  }
+
+  main div.subtitle p, main div.subtitle p span {
+    font-size: 10px;
+  }
+}
