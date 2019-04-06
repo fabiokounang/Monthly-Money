@@ -19,6 +19,11 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  log: {
+    type: Schema.Types.ObjectId,
+    ref: 'Log',
+    required: true
+  },
   registerDate: {
     type: Date,
     required: true,

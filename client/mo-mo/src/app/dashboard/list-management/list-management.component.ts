@@ -17,6 +17,7 @@ export class ListManagementComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
   totalAmountIncome: number = 0;
   totalAmountOutcome: number = 0;
+  
   constructor() { }
 
   ngOnInit() {

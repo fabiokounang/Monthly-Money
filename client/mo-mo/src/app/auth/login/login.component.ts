@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin () {
-    this.router.navigate(['dashboard']);
+    this.router.navigate(['dashboard', 'accumulation']);
   }
 
 }

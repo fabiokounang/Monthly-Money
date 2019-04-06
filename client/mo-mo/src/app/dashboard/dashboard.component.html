@@ -1,5 +1,5 @@
 <mat-sidenav-container>
-  <mat-sidenav [opened]="openSideNav" mode="side" #sidenav role="navigation">
+  <mat-sidenav [opened]="openSideNav" (click)="onToggleMenu(sidenav)" [mode]="modeSide" #sidenav role="navigation">
     <div class="profile-container">
       <div class="img-container">
         <img class="image" width="50" src="https://celebslifereel.com/wp-content/uploads/2018/06/Raon-Lee.jpg" alt="">
