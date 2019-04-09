@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Log = require('../models/log');
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
 const jwt = require('jsonwebtoken');
@@ -52,12 +53,19 @@ exports.createUser = (req, res, next) => {
     password: bcrypt.hashSync(req.body.password, salt),
     registerData: new Date().getTime()
   })
+
   objUser.save().then((result) => {
-    res.status(201).json({
-      status: true,
-      data: result,
-      message: 'Success create user'
+    let log = new Log({
+      userId: result._id 
     });
+
+    log.save().then((resp) => {
+      res.status(201).json({
+        status: true,
+        data: result,
+        message: 'Success create user'
+      });
+    })
   }).catch((error) => {
     res.status(500).json({
       status: false,
@@ -127,6 +135,7 @@ exports.deleteUser = (req, res, next) => {
 
 exports.loginUser = (req, res, next) => {
   let user = null;
+
   User.findOne({
     email: req.body.email
   }).then((dataUser) => {
@@ -134,7 +143,7 @@ exports.loginUser = (req, res, next) => {
       return res.status(500).json({
         status: false,
         data: null,
-        message: 'NO user found'
+        message: 'No user found'
       })
     }
     user = dataUser;
@@ -147,7 +156,7 @@ exports.loginUser = (req, res, next) => {
         })
       }
 
-      const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_KEY, { expiresIn: "1h" });
+      const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_KEY || 'SECRETKEY', { expiresIn: "1h" });
       
       return res.status(200).json({
         status: true,
@@ -157,6 +166,7 @@ exports.loginUser = (req, res, next) => {
         expiresIn: 3600
       })
     }).catch((err) => {
+      console.log(err);
       return res.status(500).json({
         status: false,
         data: null,

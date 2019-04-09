@@ -3,7 +3,10 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose');
+
 const user = require('./routes/user');
+const logItem = require('./routes/logItem');
+const category = require('./routes/category');
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -18,11 +21,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', user);
+app.use('/logItems', logItem);
+app.use('/categories', category);
 
 mongoose.connect('mongodb+srv://fabio:fabio@monthly-money-3aljl.gcp.mongodb.net/Mo-Mo?retryWrites=true', { useNewUrlParser: true }).then(() => {
-  console.log('CONNECT TO MONGODB');
+  console.log('CONNECTED TO MONGODB');
   app.listen(3000, () => {
-    console.log('CONNECT TO 3000');
+    console.log('CONNECTED TO 3000');
   });
 }).catch((err) => {
   console.log(err);

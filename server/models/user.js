@@ -19,10 +19,13 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  log: {
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: 'Category'
+  },
+  logs: {
     type: Schema.Types.ObjectId,
     ref: 'Log',
-    required: true
   },
   registerDate: {
     type: Date,
