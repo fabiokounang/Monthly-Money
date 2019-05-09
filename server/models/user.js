@@ -1,41 +1,21 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const uniqueValidator = require('mongoose-unique-validator');
+const db = require('../util/database');
 
-const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true
-  },
-  image: {
-    type: String
-  },
-  email: {
-    type: String,
-    unique: true,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: 'Category'
-  },
-  logs: {
-    type: Schema.Types.ObjectId,
-    ref: 'Log',
-  },
-  registerDate: {
-    type: Date,
-    required: true,
-    default: new Date().getTime()
+class User {
+  static getAllQuery () {
+    return db.execute('SELECT * FROM master_user');
   }
-});
 
-userSchema.plugin(uniqueValidator);
+  static findOneUser (data) {
+    return db.execute(`SELECT * FROM master_user WHERE email = "${data.email}"`);
+  }
 
-const User = mongoose.model('User', userSchema);
+  static registerQuery (data) {
+    return db.execute(`INSERT INTO master_user (email, username, password) VALUES ("${data.email}", "${data.username}", "${data.password}")`);
+  }
+
+  static loginQuery (data) {
+    return db.execute('IN')
+  }
+}
 
 module.exports = User;

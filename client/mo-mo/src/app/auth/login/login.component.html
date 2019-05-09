@@ -9,7 +9,7 @@
       <h3>Welcome ! Login to manage your monthly money</h3>
       <p>
         Did you 
-        <span class="forget-pass">
+        <span routerLink="/auth/forgot-password" class="forget-pass">
           forget your password ?
         </span>
       </p>
@@ -17,21 +17,27 @@
 
     <form (ngSubmit)="onLogin()" [formGroup]="loginForm" class="form-wrapper">
       <mat-form-field class="">
-        <input formControlName="email" matInput placeholder="E-mail">
+        <input type="text" formControlName="email" matInput placeholder="E-mail">
         <mat-icon matSuffix>email</mat-icon>
-        <mat-error>E-mail is required</mat-error>
+        <mat-error *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched">E-mail is required</mat-error>
+        <mat-error *ngIf="loginForm.get('email').hasError('email') && loginForm.get('email').touched">E-mail is not valid</mat-error>
       </mat-form-field>
 
       <mat-form-field class="">
-        <input formControlName="password" matInput placeholder="Password">
-        <mat-icon matSuffix>lock</mat-icon>
-        <mat-error>Password is required</mat-error>
+        <input [type]="password ? 'text' : 'password'" formControlName="password" matInput placeholder="Password">
+        <mat-icon class="eye" (click)="password = !password" matSuffix>{{ password ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-error *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">Password is required</mat-error>
+        <mat-error *ngIf="loginForm.get('password').hasError('minlength') && loginForm.get('password').touched">Password min 6 length</mat-error>
       </mat-form-field>
 
       <div class="button-wrapper">
-        <button mat-raised-button class="button-login">
-          Login
+        <button mat-raised-button class="button-login" [ngClass]="{
+          'button-valid': !loginForm.valid || sharedService.loaderVar() ? true : false
+        }" [disabled]="!loginForm.valid || sharedService.loaderVar()">
+        Login
         </button>
+        
+        <mat-progress-bar color="warn" *ngIf="sharedService.loaderVar()" mode="indeterminate"></mat-progress-bar>
         <p class="acc">Didn't have an account ?
           <span class="login-acc" routerLink="/auth/signup">Sign up here</span>
         </p>

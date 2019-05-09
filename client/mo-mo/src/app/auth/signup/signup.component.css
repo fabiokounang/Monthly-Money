@@ -37,6 +37,10 @@ main div.subtitle h3 {
   font-weight: normal;
 }
 
+main form mat-icon.eye {
+  cursor: pointer;
+}
+
 main form div.button-wrapper button {
   font-family: 'unique';
   color: white;
@@ -45,6 +49,11 @@ main form div.button-wrapper button {
 
 main form div.button-wrapper button.button-signup {
   width: 100%;
+}
+
+main form div.button-wrapper button.button-valid {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 main form div.button-wrapper p.acc {

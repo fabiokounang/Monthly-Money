@@ -7,13 +7,15 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { ListManagementComponent } from './dashboard/list-management/list-management.component';
 import { MoneyManagementComponent } from './dashboard/money-management/money-management.component';
 import { AccumulationComponent } from './dashboard/accumulation/accumulation.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full'},
   { 
     path: '', component: AuthComponent, children: [
       { path: 'auth/login', component: LoginComponent },
-      { path: 'auth/signup', component: SignupComponent }
+      { path: 'auth/signup', component: SignupComponent },
+      { path: 'auth/forgot-password', component: ForgotPasswordComponent }
     ]
   },
   { path: 'dashboard', component: DashboardComponent, children: [

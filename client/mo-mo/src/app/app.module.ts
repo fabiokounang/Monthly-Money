@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatIconModule, MatToolbarModule, MatSidenavModule, MatListModule, MatCardModule, MatSelectModule, MatTableModule, MatSortModule, MatPaginatorModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatIconModule, MatToolbarModule, MatSidenavModule, MatListModule, MatCardModule, MatSelectModule, MatTableModule, MatSortModule, MatPaginatorModule, MatSnackBarModule, MatProgressBarModule } from '@angular/material';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -12,6 +12,10 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { ListManagementComponent } from './dashboard/list-management/list-management.component';
 import { MoneyManagementComponent } from './dashboard/money-management/money-management.component';
 import { AccumulationComponent } from './dashboard/accumulation/accumulation.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SharedService } from './shared/service/shared.service';
+import { AuthInterceptor } from './shared/service/auth-interceptor';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -22,10 +26,12 @@ import { AccumulationComponent } from './dashboard/accumulation/accumulation.com
     SignupComponent,
     ListManagementComponent,
     MoneyManagementComponent,
-    AccumulationComponent
+    AccumulationComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MatButtonModule,
@@ -42,11 +48,16 @@ import { AccumulationComponent } from './dashboard/accumulation/accumulation.com
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatSnackBarModule,
+    MatProgressBarModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    SharedService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

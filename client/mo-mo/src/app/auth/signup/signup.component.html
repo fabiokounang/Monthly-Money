@@ -11,25 +11,36 @@
 
     <form (ngSubmit)="onSignUp()" [formGroup]="signUpForm" class="form-wrapper">
       <mat-form-field class="">
-        <input formControlName="email" matInput placeholder="E-mail">
+        <input type="text" formControlName="email" matInput placeholder="E-mail">
         <mat-icon matSuffix>email</mat-icon>
-        <mat-error>E-mail is required</mat-error>
+        <mat-error *ngIf="signUpForm.get('email').hasError('required') && signUpForm.get('email').touched">E-mail is required</mat-error>
+        <mat-error *ngIf="signUpForm.get('email').hasError('email') && signUpForm.get('email').touched">E-mail is not valid</mat-error>
       </mat-form-field>
       <mat-form-field class="">
-        <input formControlName="username" matInput placeholder="Username">
+        <input type="text" formControlName="username" matInput placeholder="Username">
         <mat-icon matSuffix>person</mat-icon>
-        <mat-error>Username is required</mat-error>
+        <mat-error *ngIf="signUpForm.get('username').hasError('required') && signUpForm.get('username').touched">Username is required</mat-error>
       </mat-form-field>
       <mat-form-field class="">
-        <input formControlName="password" matInput placeholder="Password">
-        <mat-icon matSuffix>lock</mat-icon>
-        <mat-error>Password is required</mat-error>
+        <input [type]="password ? 'text' : 'password'" formControlName="password" matInput placeholder="Password">
+        <mat-icon class="eye" (click)="password = !password" matSuffix>{{ password ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-error *ngIf="signUpForm.get('password').hasError('required') && signUpForm.get('password').touched">Password is required</mat-error>
+        <mat-error *ngIf="signUpForm.get('password').hasError('minlength') && signUpForm.get('password').touched">Password min 6 length</mat-error>
+      </mat-form-field>
+      <mat-form-field class="">
+        <input [type]="confirmation_password ? 'text' : 'password'" formControlName="confirmation_password" matInput placeholder="Confirmation Password">
+        <mat-icon class="eye" (click)="confirmation_password = !confirmation_password" matSuffix>{{ confirmation_password ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-error *ngIf="signUpForm.get('confirmation_password').hasError('required') && signUpForm.get('confirmation_password').touched">Confirmation Password is required</mat-error>
+        <mat-error *ngIf="signUpForm.get('confirmation_password').hasError('minlength') && signUpForm.get('confirmation_password').touched">Confirmation Password min 6 length</mat-error>
       </mat-form-field>
 
       <div class="button-wrapper">
-        <button mat-raised-button class="button-signup">
+        <button mat-raised-button class="button-signup" [ngClass]="{
+          'button-valid': !signUpForm.valid || sharedService.loaderVar() ? true : false
+        }" [disabled]="!signUpForm.valid || sharedService.loaderVar()">
           Sign Up
         </button>
+        <mat-progress-bar color="warn" *ngIf="sharedService.loaderVar()" mode="indeterminate"></mat-progress-bar>
         <p class="acc">Already have an account ?
           <span class="signup-acc" routerLink="/auth/login">Login here</span>
         </p>
