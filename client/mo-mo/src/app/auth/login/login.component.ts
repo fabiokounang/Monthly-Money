@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/service/shared.service';
-import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +12,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   password: boolean = false;
 
-  constructor(private router: Router, private sharedService: SharedService, private snack: MatSnackBar) { }
+  constructor(private router: Router, private sharedService: SharedService) { }
 
   ngOnInit() {
     this.makeForm();
@@ -32,13 +31,16 @@ export class LoginComponent implements OnInit {
         if (response.status == 200) {
           if (response.body.status) {
             this.router.navigate(['dashboard', 'accumulation']);
+            const now = new Date();
+            const expirationDate = new Date(now.getTime() + response.body.expiresIn * 1000); // new date dengan sejam lebih atas
+            this.sharedService.saveAuthData(response.body.token, expirationDate, response.body.id, response.body.expiresIn);
           } else {
-            this.snack.open(response.body.error, 'Dismiss');
+            this.sharedService.callSnack(response.body.error, 'Dismiss');
           }
         }
       })
     } else {
-      this.snack.open('All field is required !', 'Dismiss');
+      this.sharedService.callSnack('All field is required !', 'Dismiss');
     }
   }
 

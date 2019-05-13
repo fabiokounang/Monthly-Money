@@ -20,12 +20,16 @@
           <mat-icon>list</mat-icon>
           <span class="nav-caption">List Management</span>
         </a>
+        <a mat-list-item routerLink="/dashboard/category"> 
+          <mat-icon>category</mat-icon>
+          <span class="nav-caption">Category</span>
+        </a>
         <a mat-list-item routerLink="/dashboard/money-management"> 
           <mat-icon>money</mat-icon>
           <span class="nav-caption">Money Management</span>
         </a>
-        <a mat-list-item routerLink="/"> 
-          <mat-icon>money</mat-icon>
+        <a mat-list-item (click)="onLogout()"> 
+          <mat-icon>logout</mat-icon>
           <span class="nav-caption">Logout</span>
         </a>
       </mat-nav-list>

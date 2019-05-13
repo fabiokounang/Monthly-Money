@@ -2,6 +2,64 @@ div.wrapper {
   padding: 30px;
 }
 
+div.recap-section {
+  text-align: center;
+}
+
+h2.income {
+  color: green;
+  font-weight: bold;
+}
+
+h2.spending {
+  color: lightcoral;
+  font-weight: bold;
+}
+
+.charts {
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+div.income-spending {
+  font-family: 'unique-sub';
+  margin: 10px 0px;
+  text-align: center;
+}
+
+div.income-spending h4 {
+  color: grey;
+  margin: 2px;
+}
+
+div.left-section {
+  text-align: left;
+}
+
+div.right-section {
+  text-align: right;
+}
+
+div h4.subtitle-spending {
+  margin-bottom: 20px;
+  margin-left: 0;
+  text-transform: uppercase;
+}
+
+div h4 p {
+  margin-top: 1rem;
+}
+
+.spending-wrapper {
+  background-color: #FFECE7;
+}
+
+div h1 {
+  font-family: 'unique-sub';
+  color: #ff4081;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
 
 div mat-form-field.mat-field {
   width: 100%;

@@ -2,6 +2,7 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(15);
 const jwt = require('jsonwebtoken');
+
 const transporter =  require('nodemailer').createTransport({
   service: 'Gmail',
   auth: {

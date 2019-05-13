@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material';
+import { SharedService } from 'src/app/shared/service/shared.service';
 
 @Component({
   selector: 'app-list-management',
@@ -8,20 +9,30 @@ import { MatTableDataSource } from '@angular/material';
   styleUrls: ['./list-management.component.css']
 })
 export class ListManagementComponent implements OnInit {
-  displayedColumns = ['select', 'category', 'type', 'title', 'amountIncome', 'amountOutcome', 'description'];
-  dataSource = new MatTableDataSource<any>([
-    {category: 'Primary', type: '0', title: 'Salary', amountIncome: '500000000', description: 'Salary from March'},
-    {category: 'Primary', type: '1', title: 'Rent House', amountOutcome: '1800000', description: 'Rent House for March'},
-    {category: 'Food', type: '1', title: 'Lunch', amountOutcome: '45000', description: 'Fried Rice on Green Eatery'},
-  ]);
+  displayedColumns = ['select', 'date', 'categoryId', 'type', 'title', 'income', 'spending', 'description'];
+  dataSource = new MatTableDataSource<any>([]);
   selection = new SelectionModel<any>(true, []);
   totalAmountIncome: number = 0;
-  totalAmountOutcome: number = 0;
+  totalAmountSpending: number = 0;
   
-  constructor() { }
+  constructor (private sharedService: SharedService) { }
 
   ngOnInit() {
-    this.getTotalAmount();
+    this.getAllLogs();
+  }
+
+  getAllLogs () {
+    this.sharedService.connection('GET', 'master-log', {}, localStorage.getItem('userId')).subscribe((response: any) => {
+      if (response.status == 200) {
+        if (response.body.status) {
+          this.dataSource.data = response.body.data;
+          console.log(response.body.data);
+          this.getTotalAmount();
+        } else {
+          this.sharedService.callSnack(response.body.error, 'Dismiss')
+        }
+      }
+    })
   }
 
   filtering () {
@@ -51,11 +62,12 @@ export class ListManagementComponent implements OnInit {
 
   getTotalAmount () {
     this.dataSource.data.forEach((value, index) => {
-      if (value.amountIncome) {
-        this.totalAmountIncome += Number(value.amountIncome);
+      console.log(value)
+      if (value.type == 0) {
+        this.totalAmountIncome += Number(value.price);
       }
-      if (value.amountOutcome) {
-        this.totalAmountOutcome += Number(value.amountOutcome);
+      if (value.type == 1) {
+        this.totalAmountSpending += Number(value.price);
       }
     })
   }

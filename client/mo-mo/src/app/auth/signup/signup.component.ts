@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/service/shared.service';
-import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +13,7 @@ export class SignupComponent implements OnInit {
   password: boolean = false;
   confirmation_password: boolean = false;
   
-  constructor(private router: Router, private sharedService: SharedService, private snack: MatSnackBar) { }
+  constructor(private router: Router, private sharedService: SharedService) { }
   
   ngOnInit () {
     this.makeForm();
@@ -34,14 +33,14 @@ export class SignupComponent implements OnInit {
       this.sharedService.connection('POST', 'master-signup', this.signUpForm.value).subscribe((response: any) => {
         if (response.status == 200) {
           if (response.body.status) {
-            this.snack.open('Sign up succeed !', 'Okay');
+            this.sharedService.callSnack('Sign up succeed !', 'Okay');
           } else {
-            this.snack.open(response.body.error, 'Dismiss');
+            this.sharedService.callSnack(response.body.error, 'Dismiss');
           }
         }
       })
     } else {
-      this.snack.open('All field is required !', 'Dismiss');
+      this.sharedService.callSnack('All field is required !', 'Dismiss');
     }
   }
 

@@ -16,7 +16,8 @@ export class AuthInterceptor implements HttpInterceptor {
     const type = "application/json; charset=utf-8";
     const headers = new HttpHeaders({
       'Content-Type': type,
-      'Accept': 'text/html, application/json, text/plain, multipart/form-data, */*'
+      'Accept': 'text/html, application/json, text/plain, multipart/form-data, */*',
+      'Authorization': localStorage.getItem('token') ? localStorage.getItem('token') : ''
     });
     
     const copy = req.clone({

@@ -7,5 +7,14 @@ export default  { // subHttp untuk masing-masing api yang ada (jika api bank, ma
   },
   'master-forgot-password': {
     'endpoint': 'users/forgot-password'
+  },
+  'master-category': {
+    'endpoint': 'categories/'
+  },
+  'master-log': {
+    'endpoint': 'logs/'
+  },
+  'master-log-category': {
+    'endpoint': 'logs/categories/'
   }
 }

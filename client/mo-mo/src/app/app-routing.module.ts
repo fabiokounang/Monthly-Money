@@ -8,6 +8,8 @@ import { ListManagementComponent } from './dashboard/list-management/list-manage
 import { MoneyManagementComponent } from './dashboard/money-management/money-management.component';
 import { AccumulationComponent } from './dashboard/accumulation/accumulation.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { CategoryComponent } from './dashboard/category/category.component';
+import { AuthGuard } from './shared/service/auth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full'},
@@ -19,9 +21,10 @@ const routes: Routes = [
     ]
   },
   { path: 'dashboard', component: DashboardComponent, children: [
-      { path: 'list-management', component: ListManagementComponent },
-      { path: 'money-management', component: MoneyManagementComponent },
-      { path: 'accumulation', component: AccumulationComponent }
+      { path: 'list-management', component: ListManagementComponent, canActivate: [AuthGuard] },
+      { path: 'money-management', component: MoneyManagementComponent, canActivate: [AuthGuard] },
+      { path: 'category', component: CategoryComponent, canActivate: [AuthGuard] },
+      { path: 'accumulation', component: AccumulationComponent, canActivate: [AuthGuard] }
     ] 
   }
 ];

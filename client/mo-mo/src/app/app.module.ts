@@ -16,6 +16,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedService } from './shared/service/shared.service';
 import { AuthInterceptor } from './shared/service/auth-interceptor';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { CategoryComponent } from './dashboard/category/category.component';
+import { AuthGuard } from './shared/service/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
     SignupComponent,
     ListManagementComponent,
     MoneyManagementComponent,
+    CategoryComponent,
     AccumulationComponent,
     ForgotPasswordComponent
   ],
@@ -55,6 +58,7 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
     AppRoutingModule
   ],
   providers: [
+    AuthGuard,
     SharedService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/shared/service/shared.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-forgot-password',
@@ -11,7 +10,7 @@ import { MatSnackBar } from '@angular/material';
 export class ForgotPasswordComponent implements OnInit {
   forgotForm: FormGroup;
 
-  constructor(private sharedService: SharedService, private snack: MatSnackBar) { }
+  constructor(private sharedService: SharedService) { }
 
   ngOnInit() {
     this.makeForm();
@@ -28,14 +27,14 @@ export class ForgotPasswordComponent implements OnInit {
       this.sharedService.connection('POST', 'master-forgot-password', this.forgotForm.value).subscribe((response: any) => {
         if (response.status == 200) {
           if (response.body.status) {
-            this.snack.open('Email sent ! You can check your email in a few minutes', 'Okay');
+            this.sharedService.callSnack('Email sent ! You can check your email in a few minutes', 'Okay');
           } else {
-            this.snack.open(response.body.error, 'Dismiss');
+            this.sharedService.callSnack(response.body.error, 'Dismiss');
           }
         }
       })
     } else {
-      this.snack.open('Email field is required !', 'Dismiss');
+      this.sharedService.callSnack('Email field is required !', 'Dismiss');
     }
   }
 

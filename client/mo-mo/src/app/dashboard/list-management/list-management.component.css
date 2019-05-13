@@ -12,6 +12,10 @@ div table td span {
   font-family: 'unique-sub';
 }
 
+div table td p.date {
+  margin: 0;
+}
+
 div mat-form-field.mat-field {
   width: 100%;
 }

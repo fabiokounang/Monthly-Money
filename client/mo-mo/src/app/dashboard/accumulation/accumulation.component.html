@@ -1,5 +1,54 @@
 <div class="wrapper">
-  <form class="form-wrapper">
+  
+  <div class="row recap-section">
+    <div class="col-6">
+      <mat-card class="">
+        <div class="row">
+          <div class="col-12">
+            <h1>Recapitulation</h1>
+          </div>
+    
+          <div class="income-spending col-12">
+            <h4>Total Income</h4>
+            <h2 class="income">{{incomeTotal | currency: 'Rp ' : 'symbol' : '1.0'}}</h2>
+          </div>
+              
+          <div class="income-spending col-12">
+            <h4>Total Spending</h4>
+            <h2 class="spending">{{spendingTotal | currency: 'Rp ' : 'symbol' : '1.0'}}</h2>
+          </div>
+         </div>
+        </mat-card>
+      </div>
+
+      <div class="col-6">
+        <mat-card class="charts">
+          <canvas #myChart width="500" height="200"></canvas>
+        </mat-card>
+      </div>
+  </div>
+  
+  <br>
+
+  <mat-card class="spending-wrapper" *ngIf="resultLog.length > 0">    
+    <div class="row">
+      <div class="income-spending col-6 left-section">
+        <h4 class="subtitle-spending">Categories</h4>
+        <p *ngFor="let category of resultLog">
+          {{category.name}}
+        </p>
+      </div>
+
+      <div class="income-spending col-6 right-section">
+        <h4 class="subtitle-spending">Spending</h4>
+        <p *ngFor="let price of resultLog">
+          {{price['SUM (price)'] | currency: 'Rp ' : 'symbol' : '1.0'}}
+        </p>
+      </div>
+    </div>    
+  </mat-card>
+
+  <!-- <form class="form-wrapper">
     <mat-form-field class="mat-field">
       <mat-label>Accumulate Settings</mat-label>
       <mat-select>
@@ -8,5 +57,5 @@
       </mat-select>
     </mat-form-field>
   </form>
-  <canvas #myChart width="500" height="200"></canvas>
+   -->
 </div>
